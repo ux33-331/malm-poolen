@@ -6,62 +6,511 @@
 <head>
 	<meta charset="utf-8">
 	<title>Malmgruvan webminer</title>
-	<link rel="stylesheet" type="text/css" href="/css/styleMiner.css">
+
 	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+	<style>
+		body {
+			font-family: monospace;
+			background: rgb(30, 30, 30);
+			color: rgba(255, 255, 255, 0.516);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			align-content: center;
+			font-size: 0.8rem;
+		}
+
+
+		.sidebyside {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+
+		.huvud {
+			width: 800px;
+		}
+
+		.wrapper {
+			padding-top: 100px;
+			display: flex;
+			width: 400px;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: flex-end;
+			border: 1px solid rgba(82, 80, 80, 0.516);
+			padding: 1rem;
+			border-radius: 10px;
+			margin: 10px;
+		}
+
+		.info-div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			align-content: center;
+			padding: 1rem;
+			width: 400px;
+			border-radius: 10px;
+			border: 1px solid rgba(82, 80, 80, 0.516);
+			margin: 10px;
+		}
+
+		.mining {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			align-content: center;
+			width: 810px;
+			margin: 10px;
+		}
+
+		.footer-buttons {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-end;
+		}
+
+		.input {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: flex-end;
+		}
+
+		.wrapper,
+		.buttons {
+			display: flex;
+			justify-content: space-evenly;
+			align-items: center;
+		}
+
+		input,
+		button {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: flex-end;
+			font-family: monospace;
+			font-size: 0.8rem;
+			font-weight: 100;
+			background: rgb(30, 30, 30);
+			color: rgba(255, 255, 255, 0.516);
+			display: flex;
+			border: 1px solid rgba(82, 80, 80, 0.516);
+			border-radius: 5px;
+			padding-right: 1rem;
+			padding-left: 1rem;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			padding: 15px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background: rgb(19, 19, 19);
+			border: 1px solid transparent;
+		}
+
+		.btn-default{
+			margin: 1rem;
+		}
+
+		input {
+			width: 300px;
+		}
+
+		img {
+			justify-content: center;
+			height: 100px;
+			width: auto;
+		}
+
+		h1 {
+			font-weight: 100;
+			font-size: 1rem;
+		}
+
+		h2 {
+			font-size: 0.8rem;
+			padding: 1rem;
+		}
+
+		p {
+			margin-top: 7px;
+			color: rgba(0, 0, 0, 0.516) !important;
+			animation-duration: 0.01s;
+			animation-name: textflicker;
+			animation-iteration-count: infinite;
+			animation-direction: alternate;
+			opacity: 0.8;
+		}
+
+
+		@media (prefers-color-scheme: light) {
+
+			body {
+				background: white;
+				color: rgb(30, 30, 30);
+			}
+
+			.wrapper {
+				border: 1px solid rgba(30, 30, 30, 0.295);
+			}
+
+			input,
+			button {
+				background: white;
+				color: rgb(30, 30, 30);
+				border: 1px solid rgba(30, 30, 30, 0.295);
+			}
+
+			.info-div {
+				border: 1px solid rgba(30, 30, 30, 0.295);
+			}
+
+			button:hover {
+				background: rgba(172, 171, 171, 0.356);
+				border: 1px solid transparent;
+			}
+		}
+
+		.huvud {
+			display: flex;
+			justify-content: center;
+		}
+
+		.crt {
+			font-size: 16px;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 1rem;
+		}
+
+		.crtBox {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding-top: 1rem;
+			width: 600px;
+			background-color: #FBBF2E;
+			border-radius: 10px;
+			border: none;
+			position: relative;
+			overflow: hidden;
+			box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.493);
+			-webkit-app-region: drag;
+			margin-bottom: 0rem;
+		}
+
+		.crtBox img {
+			opacity: 0.8;
+			animation-duration: 0.01s;
+			animation: flicker infinite;
+		}
+
+		.crt .crtBox img {
+			padding-left: 0;
+			height: 33px !important;
+			animation-duration: 0.01s;
+			animation-name: imgflicker;
+			animation-iteration-count: infinite;
+			animation-direction: alternate;
+		}
+
+		.crtBox::before,
+		.crtBox::after {
+			display: block;
+			pointer-events: none;
+			content: '';
+			position: absolute;
+		}
+
+		.crtBox::before {
+			width: 100%;
+			height: 2px;
+			z-index: 2147483649;
+			background: rgba(0, 0, 0, 0.3);
+			opacity: 0.75;
+			-webkit-animation: crtBox 4s linear infinite;
+			animation: crtBox 4s linear infinite;
+		}
+
+		.crtBox::after {
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 2147483648;
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), color-stop(51%, rgba(0, 0, 0, 0.3)));
+			background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.1) 51%);
+			background-size: 100% 4px;
+			-webkit-animation: crtBox 1s steps(60) infinite;
+			animation: crtBox 1s steps(60) infinite;
+		}
+
+		@-webkit-keyframes crtBox {
+			0% {
+				-webkit-transform: translate3d(0, 200000%, 0);
+				transform: translate3d(0, 200000%, 0);
+			}
+		}
+
+		@keyframes crtBox {
+			0% {
+				-webkit-transform: translate3d(0, 200000%, 0);
+				transform: translate3d(0, 200000%, 0);
+			}
+		}
+
+		@-webkit-keyframes crtBoxs {
+			0% {
+				background-position: 0 50%;
+			}
+		}
+
+		@keyframes crtBoxs {
+			0% {
+				background-position: 0 50%;
+			}
+		}
+
+
+		@keyframes flicker {
+			0% {
+				opacity: 0.27861;
+			}
+
+			5% {
+				opacity: 0.34769;
+			}
+
+			10% {
+				opacity: 0.23604;
+			}
+
+			15% {
+				opacity: 0.90626;
+			}
+
+			20% {
+				opacity: 0.18128;
+			}
+
+			25% {
+				opacity: 0.83891;
+			}
+
+			30% {
+				opacity: 0.65583;
+			}
+
+			35% {
+				opacity: 0.67807;
+			}
+
+			40% {
+				opacity: 0.26559;
+			}
+
+			45% {
+				opacity: 0.84693;
+			}
+
+			50% {
+				opacity: 0.96019;
+			}
+
+			55% {
+				opacity: 0.08594;
+			}
+
+			60% {
+				opacity: 0.20313;
+			}
+
+			65% {
+				opacity: 0.71988;
+			}
+
+			70% {
+				opacity: 0.53455;
+			}
+
+			75% {
+				opacity: 0.37288;
+			}
+
+			80% {
+				opacity: 0.71428;
+			}
+
+			85% {
+				opacity: 0.70419;
+			}
+
+			90% {
+				opacity: 0.7003;
+			}
+
+			95% {
+				opacity: 0.36108;
+			}
+
+			100% {
+				opacity: 0.24387;
+			}
+		}
+
+		@keyframes textflicker {
+			from {
+				text-shadow: 1px 0 0 #eb77c4, -1px 0 0 #88e97f;
+			}
+
+			to {
+				text-shadow: 0.9px 0.5px 0.5px #f79cd9, -0.9px -0.5px 0.5px #a0eb99;
+			}
+		}
+
+
+		@keyframes imgflicker {
+			from {
+				-webkit-filter: drop-shadow(1px 0px 0px #ea36af, -2px 0 0 #75fa69);
+				filter: drop-shadow(1px 0px 0px #ea36af);
+			}
+
+			to {
+				-webkit-filter: drop-shadow(2px 0.5px 2px #ea36af, 2px 0.5px 2px #75fa69);
+				filter: drop-shadow(2px 0.5px 2px #ea36af, 2px 0.5px 2px #75fa69);
+			}
+		}
+
+		@media only screen and (max-device-width: 736px) {
+
+			body {
+				font-size: 24px;
+			}
+
+			.sidebyside {
+				width: 90%;
+				font-size: 24px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				align-content: center;
+			}
+
+			input {
+				width: 500px;
+			}
+
+			.wrapper {
+				width: 90%;
+				font-size: 24px;
+				padding-bottom: 3rem;
+			}
+
+			.info-div {
+				width: 90%;
+				font-size: 24px;
+				padding-bottom: 3rem;
+			}
+
+			p,
+			h1,
+			h2,
+			button,
+			input {
+				font-size: 34px;
+			}
+
+		}
+	</style>
 </head>
 
 <body>
 
 	<header class="huvud">
-		<br>
-		<h1>Malmgruvan webminer</h1>
-		<br>
+		<div class="crt">
+			<div class="crtBox">
+				<img src="icon.png" height="70px" />
+				<p>Malmgruvan Webminer</p>
+			</div>
+		</div>
 	</header>
-	<div class="wrapper">
+	<div class="sidebyside">
+		<div class="wrapper">
 
-		<div class="input">
-			<div>
-				<label>Your SEKR address:</label>
-				<input id="wallet" type="text" placeholder="Wallet address"
-					value="">
+			<div class="input">
+				<div>
+					<label>SEKR address:</label>
+					<input id="wallet" type="text" placeholder="Wallet address" value="">
+				</div>
+
+				<div>
+					<label>Pool:</label>
+					<input id="pool" type="text" placeholder="Your favourite mining pool" value="pool2.kryptokrona.se">
+				</div>
+
+				<div>
+					<label>Port number:</label>
+					<input id="port" type="number" placeholder="Your pools port" value="3333">
+				</div>
+
+				<div>
+					<label>Worker name:</label>
+					<input id="workerName" type="text" placeholder="Your worker name" value="x">
+				</div>
+
+				<div>
+					<label>Threads:</label>
+					<input id="threads" type="number" min="1" max="64" value="4" placeholder="Number of threads">
+				</div>
+
+				<div>
+					<label>Mining speed:</label>
+					<input id="speed" type="number" placeholder="Mining speed in percent" min="1" max="100" value="100">
+				</div>
+			</div>
+			<br>
+			<div class="buttons">
+				<button class="btn-default" onclick="updateValues();miner.start()"> Start mining! </button>
+				<button class="btn-default" onclick="miner.stop();"> Stop mining! </button>
 			</div>
 
-			<div>
-				<label>Pool of choice:</label>
-				<input id="pool" type="text" placeholder="Your favourite mining pool" value="pool2.kryptokrona.se">
-			</div>
 
-			<div>
-				<label>Port number:</label>
-				<input id="port" type="number" placeholder="Your pools port" value="3333">
-			</div>
-
-			<div>
-				<label>Worker name:</label>
-				<input id="workerName" type="text" placeholder="Your worker name" value="x">
-			</div>
-
-			<div>
-				<label>Threads:</label>
-				<input id="threads" type="number" min="1" max="64" value="4" placeholder="Number of threads">
-			</div>
-
-			<div>
-				<label>Mining speed:</label>
-				<input id="speed" type="number" placeholder="Mining speed in percent" min="1" max="100" value="100">
-			</div>
 		</div>
 		<br>
-		<div class="buttons">
-			<button onclick="updateValues();miner.start()"> Start mining! </button>
-			<button onclick="miner.stop();"> Stop mining! </button>
-		</div>
 
-		
+		<div class="info-div">
+			<h2>
+				This webminer makes use of your devices CPU to mine XKR,
+				simply paste your SEKR address and start mining in Malmgruvan. <br> <br>
+
+				<bold>Make sure to turn off content blockers to allow the miner to start.</bold> <br> <br>
+
+				Also remember to keep your device cool when mining. <br>
+			</h2>
+			<br><br>
+			<br><br>
+			<div class="buttonsTonavigate">
+				<button onclick="window.location.href = 'http://pool2.kryptokrona.se';">Back to Malmgruvan</button>
+			</div>
+		</div>
 	</div>
-<br>
-	<div class="buttonsTonavigate">
-		<button>Back to main page</button>
+
+	<div class="mining">
+
 	</div>
 
 	<script src='kryptokronaminer.js'></script>
