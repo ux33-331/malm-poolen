@@ -1,12 +1,12 @@
 var api = 'http://pool2.kryptokrona.se:8117' // Change this to your pools api, if ssl is not used its likely to be 'http://yourpooldomain.se:8117' 
 
-var api_blockexplorer = 'https://explorer.kryptokrona.se/api' // Leave this unchanged
+var api_blockexplorer = 'http://pool2.kryptokrona.se:11898' // Leave this unchanged
 
-var poolHost = 'poolhost.com' // Change this to your pools site
+var poolHost = 'pool2.kryptokrona.se' // Change this to your pools site
 
 var irc = 'irc.freenode.net/#poolhost' // Change this to your pools IRC channel
 
-var email = 'support@poolhost.com' // Change this to your our pools email
+var email = 'williamb@kryptokrona.se' // Change this to your our pools email
 
 var cryptonatorWidget = ['{symbol}-BTC', '{symbol}-USD', '{symbol}-EUR'] // Leave this unchanged
 
