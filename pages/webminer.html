@@ -1,0 +1,90 @@
+<!-- 2020 Kryptokrona -->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<title>Kryptokrona-Webminer</title>
+	<link rel="stylesheet" type="text/css" href="/css/styleMiner.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+	<header class="huvud">
+		<br>
+		<h1>Kryptokrona WebMiner</h1>
+		<br>
+	</header>
+	<div class="wrapper">
+
+		<div class="input">
+			<div>
+				<label>Your SEKR address:</label>
+				<input id="wallet" type="text" placeholder="Wallet address"
+					value="SEKReX2avthCKT4YUUKV3jgZ1Hderk9XbRciqp8vHVPoDSb9nA1dCV86Jia3TkD4jWgfxeh1AEYV3DKEAesSb7mSAvNqf6cB6kR">
+			</div>
+
+			<div>
+				<label>Pool of choice:</label>
+				<input id="pool" type="text" placeholder="Your favourite mining pool" value="pool2.kryptokrona.se">
+			</div>
+
+			<div>
+				<label>Port number:</label>
+				<input id="port" type="number" placeholder="Your pools port" value="3333">
+			</div>
+
+			<div>
+				<label>Worker name:</label>
+				<input id="workerName" type="text" placeholder="Your worker name" value="x">
+			</div>
+
+			<div>
+				<label>Threads:</label>
+				<input id="threads" type="number" min="1" max="64" value="4" placeholder="Number of threads">
+			</div>
+
+			<div>
+				<label>Mining speed:</label>
+				<input id="speed" type="number" placeholder="Mining speed in percent" min="1" max="100" value="100">
+			</div>
+		</div>
+		<br>
+		<div class="buttons">
+			<button onclick="updateValues();miner.start()"> Start mining! </button>
+			<button onclick="miner.stop();"> Stop mining! </button>
+		</div>
+	</div>
+
+	<script src='kryptokronaminer.js'></script>
+
+	<script>
+		const config = {
+			pool: "pool2.kryptokrona.se", // pool url
+			port: 3333, // pool port
+			wallet: "", // your wallet address
+			speed: 100, // cpu speed/usage in %
+			threads: 4, // number of threads using for mining
+			workerName: "x" // leave this to default 'x'
+		}
+
+		const miner = new kryptokronaMiner(config);
+		console.log(miner.dump());
+
+		miner.on("report", function (rep) {
+			console.log(rep);
+		});
+
+		function updateValues() {
+			for (let i in config) {
+				config[i] = document.getElementById(i).value;
+				miner[i] = document.getElementById(i).value;
+			}
+		}
+	</script>
+
+</body>
+
+</html>
