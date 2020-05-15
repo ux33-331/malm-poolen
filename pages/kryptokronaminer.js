@@ -14,15 +14,19 @@ class kryptokronaMiner {
 		this.events = {
 			start: function (instance) {
 				console.log(`[XKR] Webminer started with ${instance.speed}% speed and ${instance.threads} threads...`)
+				alert(`Started mining in malmgruvan with ${instance.speed}% speed and ${instance.threads} threads...`)
 			},
 			stop: function () {
 				console.log("[XKR] Webminer stopped!")
+				alert("Leaving malmgruvan, bye!")
 			},
 			report: function (report) {
 				console.log("[XKR] Webminer report: " + report)
+				alert("[XKR] Webminer report: " + report)
 			},
 			error: function (code, text) {
 				console.log("[XKR] Webminer error " + code + ": " + text)
+				alert("[XKR] Webminer error " + code + ": " + text)
 			}
 		}
 		if ("pool" in config) {
